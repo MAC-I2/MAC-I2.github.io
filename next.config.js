@@ -3,7 +3,7 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 });
 
-// Deployed as the MAC-VI org root site at https://mac-vi.github.io/ (no base path).
+// Deployed as the MAC-I2 org root site at https://mac-i2.github.io/ (no base path).
 const basePath = '';
 
 const nextConfig = {

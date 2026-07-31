@@ -2,7 +2,7 @@
  * @type {import('next-sitemap').IConfig}
  */
 module.exports = {
-  siteUrl: 'https://mac-vi-fusion.github.io',
+  siteUrl: 'https://mac-i2.github.io',
   outDir: 'docs',
   generateRobotsTxt: true,
   robotsTxtOptions: {

@@ -21,6 +21,13 @@ const links = {
   video: '#',
 };
 
+// Method name, typeset with a real superscript so it matches the paper's MAC-I$^2$.
+const MACI2 = (
+  <>
+    MAC-I<sup>2</sup>
+  </>
+);
+
 export default function HomePage() {
   const [mode, toggleMode] = useDarkMode();
   const textColor = mode === 'dark' ? 'text-gray-300' : 'text-gray-700';
@@ -30,8 +37,8 @@ export default function HomePage() {
   const hlTextColor = mode === 'dark' ? 'text-primary-500' : 'text-primary-600';
   const hlBgColor = mode === 'dark' ? 'bg-primary-500' : 'bg-primary-600';
 
-  const citation_bibtex = `@article{fei2026macvi,
-    title={MAC-VI: Learned Metrics-Aware Covariance for Robust Visual-Inertial Fusion in Initialization and Calibration},
+  const citation_bibtex = `@article{fei2026maci2,
+    title={MAC-I$^2$: Learned Metrics-Aware Covariance for Robust Visual-Inertial Fusion in Initialization and Calibration},
     author={Fei, Xiang and Qiu, Yuheng and Xu, Can and Chen, Yutian and Li, Ruogu and Zuo, Xingxing and Wang, Wenshan and Scherer, Sebastian},
     year={2026}
   }`;
@@ -96,11 +103,11 @@ export default function HomePage() {
         </div>
         <div className='layout z-20 relative flex min-h-screen flex-col items-center justify-center p-4 text-center'>
           <h1 className='mt-4 text-5xl'>
-            MAC-VI: Learned{' '}
+            MAC-I<sup>2</sup>: Learned{' '}
             <span className={hlTextColor}>M</span>etrics-<span className={hlTextColor}>A</span>ware{' '}
-            <span className={hlTextColor}>C</span>ovariance for Robust{' '}
-            <span className={hlTextColor}>V</span>isual-<span className={hlTextColor}>I</span>nertial Fusion
-            {' '}in Initialization and Calibration
+            <span className={hlTextColor}>C</span>ovariance for Robust Visual-
+            <span className={hlTextColor}>I</span>nertial Fusion in{' '}
+            <span className={hlTextColor}>I</span>nitialization and Calibration
           </h1>
           <div className='container mt-8 pb-2'>
             <span className='text-lg'>
@@ -163,18 +170,18 @@ export default function HomePage() {
             measurements are combined according to their respective uncertainties. Existing methods, however, fuse the
             two modalities with predefined uncertainties, regardless of how reliable each is in the local context, and
             thus often struggle under challenging environments involving illumination changes, dynamic objects, and
-            textureless regions. In this paper, we present <span className='font-semibold'>MAC-VI</span>, which achieves
+            textureless regions. In this paper, we present <span className='font-semibold'>{MACI2}</span>, which achieves
             robust VI fusion through <span className={hlTextColor}>learned metrics-aware covariance</span> for both
-            modalities, so that vision and IMU compete on their own merits rather than relying on predefined suboptimal
+            modalities, so that vision and IMU compete on their own merits rather than relying on predefined
             uncertainties. Here, <em>metrics-aware</em> means that each predicted covariance faithfully reflects the
             actual magnitude of the corresponding measurement noise. On the visual side, we propagate learned
             feature-matching uncertainties into pose covariances for the fusion. On the inertial side, motivated by the
             observation that integration error accumulates sharply at the early stage and grows slowly afterward, we
             design a learned IMU model with a learnable initial covariance, and propose a dedicated fine-tuning strategy
             on a held-out training subset to enable the metrics-aware covariance on unseen sequences. As a showcase, we
-            apply MAC-VI to build a VI initialization and calibration system, since accurate and robust initialization
+            apply {MACI2} to build a VI initialization and calibration system, since accurate and robust initialization
             and calibration are the prerequisite for any reliable VI system. Experiments on EuRoC, TUM-VI, and VBR show
-            that MAC-VI substantially outperforms existing methods: it achieves a 100% initialization success rate on
+            that {MACI2} substantially outperforms existing methods: it achieves a 100% initialization success rate on
             EuRoC, reducing gravity and velocity errors by about 59% and 74% over the strongest baseline, and maintains a
             71% success rate on VBR sequences where competing methods drop below 10% or fail entirely.
           </p>
@@ -202,7 +209,7 @@ export default function HomePage() {
         <div className='layout pt-12 pb-2'>
           <h2 className='mb-4'>Demonstrations</h2>
           <p className='text-lg'>
-            MAC-VI stays reliable where predefined uncertainties fail. Explore its behavior across{' '}
+            {MACI2} stays reliable where predefined uncertainties fail. Explore its behavior across{' '}
             <span className='font-semibold'>challenging environments</span> and real-world{' '}
             <span className='font-semibold'>deployments</span>.
           </p>
@@ -284,7 +291,7 @@ export default function HomePage() {
         <div className='layout py-12'>
           <h2 className='pb-4'>Method</h2>
           <p className='text-lg'>
-            MAC-VI learns <span className={hlTextColor}>metrics-aware covariance</span> for both modalities, so that each
+            {MACI2} learns <span className={hlTextColor}>metrics-aware covariance</span> for both modalities, so that each
             measurement is weighted by its actual reliability in the local context rather than by a predefined rule.
           </p>
 
@@ -318,13 +325,13 @@ export default function HomePage() {
 
           <h3 className='pt-12'>Showcase: VI Initialization &amp; Calibration</h3>
           <p className='py-2 text-lg'>
-            As a showcase application, we build a VI initialization and calibration system upon MAC-VI, since accurate
+            As a showcase application, we build a VI initialization and calibration system upon {MACI2}, since accurate
             and robust initialization and calibration are the prerequisite for any reliable VI system.
           </p>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pt-4'>
             <Figure
               img_src={asset('/images/system_overview.png')}
-              caption='System overview of the MAC-VI initialization and calibration pipeline.'
+              caption={<>System overview of the {MACI2} initialization and calibration pipeline.</>}
               isDark={mode === 'dark'}
               idx={3}
             />
@@ -338,7 +345,7 @@ export default function HomePage() {
                 camera–IMU extrinsic calibration, all weighted by the learned reliability of each measurement.
               </p>
               <p>
-                Because unreliable measurements are no longer over-weighted, MAC-VI remains robust under illumination
+                Because unreliable measurements are no longer over-weighted, {MACI2} remains robust under illumination
                 changes, dynamic objects, and textureless regions — where methods with predefined uncertainties degrade
                 or fail entirely.
               </p>
@@ -354,7 +361,12 @@ export default function HomePage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 items-start [&_img]:h-[340px] [&_img]:w-auto [&_img]:object-contain [&_img]:mx-auto'>
             <Figure
               img_src={asset('/images/euroc_gerr_vs_sr.png')}
-              caption='Gravity error vs. initialization success rate on EuRoC — MAC-VI reaches a 100% success rate with the lowest gravity error.'
+              caption={
+                <>
+                  Gravity error vs. initialization success rate on EuRoC — {MACI2} reaches a 100% success rate with the
+                  lowest gravity error.
+                </>
+              }
               isDark={mode === 'dark'}
               idx={4}
             />

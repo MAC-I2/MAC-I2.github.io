@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://mac-vi-fusion.github.io
+Host: https://mac-i2.github.io
 
 # Sitemaps
-Sitemap: https://mac-vi-fusion.github.io/sitemap.xml
+Sitemap: https://mac-i2.github.io/sitemap.xml
