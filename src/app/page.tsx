@@ -103,11 +103,12 @@ export default function HomePage() {
         </div>
         <div className='layout z-20 relative flex min-h-screen flex-col items-center justify-center p-4 text-center'>
           <h1 className='mt-4 text-5xl'>
+            {/* MAC maps to the leading letters; the squared I stands for the two showcase tasks,
+                so those are highlighted as whole words rather than initials. */}
             MAC-I<sup>2</sup>: Learned{' '}
             <span className={hlTextColor}>M</span>etrics-<span className={hlTextColor}>A</span>ware{' '}
-            <span className={hlTextColor}>C</span>ovariance for Robust Visual-
-            <span className={hlTextColor}>I</span>nertial Fusion in{' '}
-            <span className={hlTextColor}>I</span>nitialization and Calibration
+            <span className={hlTextColor}>C</span>ovariance for Robust Visual-Inertial Fusion in{' '}
+            <span className={hlTextColor}>Initialization</span> and <span className={hlTextColor}>Calibration</span>
           </h1>
           <div className='container mt-8 pb-2'>
             <span className='text-lg'>
