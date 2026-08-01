@@ -280,7 +280,19 @@ export default function HomePage() {
               </div>
               <div className='grid grid-cols-2 gap-2 pt-1 text-xs text-gray-400'>
                 <span className='text-center'>Sensor Input</span>
-                <span className='text-center'>Estimated Trajectory during Calibration</span>
+                <div className='text-center'>
+                  <p>Estimated Trajectory during Calibration</p>
+                  <p className='mt-1 flex flex-wrap items-center justify-center gap-x-3 gap-y-1'>
+                    <span className='inline-flex items-center gap-1'>
+                      <span className='inline-block h-0.5 w-4 rounded-full bg-red-500' />
+                      Ground Truth
+                    </span>
+                    <span className='inline-flex items-center gap-1'>
+                      <span className='inline-block h-0.5 w-4 rounded-full bg-blue-500' />
+                      {MACI2} Estimated
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
           ))}
