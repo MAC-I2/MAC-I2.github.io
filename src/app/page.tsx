@@ -142,19 +142,36 @@ export default function HomePage() {
           </div>
         </div>
         <div className={clsx('absolute w-auto min-w-full min-h-full max-w-none z-10', maskColor)} />
-        <div className='absolute bottom-4 left-4 z-20 text-sm'>
-          <p>
-            <span className='align-super text-xs'>*</span> Equal Contribution
-          </p>
-          <p>
-            <span className='align-super text-xs'>1</span> Robotics Institute, Carnegie Mellon University
-          </p>
-          <p>
-            <span className='align-super text-xs'>2</span> MBZUAI
-          </p>
-          <p>
-            <span className='align-super text-xs'>3</span> UTIAS, University of Toronto
-          </p>
+        {/* Affiliations and the background-video legend share one bar so they wrap
+            instead of overlapping on narrow screens. */}
+        <div className='absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 text-sm'>
+          <div>
+            <p>
+              <span className='align-super text-xs'>*</span> Equal Contribution
+            </p>
+            <p>
+              <span className='align-super text-xs'>1</span> Robotics Institute, Carnegie Mellon University
+            </p>
+            <p>
+              <span className='align-super text-xs'>2</span> MBZUAI
+            </p>
+            <p>
+              <span className='align-super text-xs'>3</span> UTIAS, University of Toronto
+            </p>
+          </div>
+          <div className='sm:text-right'>
+            <p>Background: trajectories estimated during calibration</p>
+            <p className='mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 sm:justify-end'>
+              <span className='inline-flex items-center gap-1'>
+                <span className='inline-block h-0.5 w-4 rounded-full bg-red-500' />
+                Ground Truth
+              </span>
+              <span className='inline-flex items-center gap-1'>
+                <span className='inline-block h-0.5 w-4 rounded-full bg-blue-500' />
+                {MACI2} Estimated
+              </span>
+            </p>
+          </div>
         </div>
         {/* 4x2 mosaic of the four calibration sequences, built from the same clips as the
             Calibration section (see scripts note in the commit that added it). */}
