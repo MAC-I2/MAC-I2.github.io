@@ -156,8 +156,10 @@ export default function HomePage() {
             <span className='align-super text-xs'>3</span> UTIAS, University of Toronto
           </p>
         </div>
+        {/* 4x2 mosaic of the four calibration sequences, built from the same clips as the
+            Calibration section (see scripts note in the commit that added it). */}
         <video autoPlay loop muted playsInline className='absolute w-auto min-w-full min-h-full max-w-none z-0'>
-          <source src={asset('/video/PC_ZED.mp4')} type='video/mp4' />
+          <source src={asset('/video/calib_hero.mp4')} type='video/mp4' />
           Your browser does not support the video tag.
         </video>
       </section>
