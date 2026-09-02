@@ -51,23 +51,6 @@ export default function HomePage() {
     { stat: '80%', label: 'Success rate on challenging VBR sequences' },
   ];
 
-  // EuRoC initialization results, 10-keyframe setting, averaged over the evaluation
-  // sequences (paper Table I). Errors are averages; SR is the fraction of segments
-  // solved within the 2 deg / 0.1 m/s thresholds.
-  const eurocRows: Array<{ method: string; stereo: boolean; vel: string; gdir: string; sr: string; ours?: boolean }> = [
-    { method: 'VINS-Mono', stereo: false, vel: '0.169', gdir: '1.611', sr: '0.318' },
-    { method: 'DRT-t', stereo: false, vel: '0.134', gdir: '1.137', sr: '0.633' },
-    { method: 'DRT-l', stereo: false, vel: '0.138', gdir: '1.303', sr: '0.640' },
-    { method: 'sqrt-VINS mono*', stereo: false, vel: '0.073', gdir: '1.072', sr: '0.704' },
-    { method: 'FF-VIO-Init*', stereo: false, vel: '0.055', gdir: '0.914', sr: '0.866' },
-    { method: 'VINS-Fusion', stereo: true, vel: '0.031', gdir: '2.117', sr: '0.582' },
-    { method: 'ORB-SLAM3', stereo: true, vel: '0.050', gdir: '1.391', sr: '0.820' },
-    { method: 'Stereo-NEC', stereo: true, vel: '0.037', gdir: '1.517', sr: '0.823' },
-    { method: 'sqrt-VINS stereo*', stereo: true, vel: '0.062', gdir: '1.049', sr: '0.736' },
-    { method: 'MAC-I2 w/o Learned IMU', stereo: true, vel: '0.018', gdir: '0.889', sr: '0.999', ours: true },
-    { method: 'MAC-I2 w/ Learned IMU', stereo: true, vel: '0.018', gdir: '0.418', sr: '0.999', ours: true },
-  ];
-
   // ---- Tabbed demonstrations (MAC-VO style tab bar) ----
 
   // Tab 1 — Challenging environments (3 clips).
@@ -407,106 +390,25 @@ export default function HomePage() {
       <section className={clsx(bgColor, textColor)}>
         <div className='layout py-12'>
           <h2 className='pb-4'>Quantitative Results</h2>
-          <p className='text-lg'>
-            We evaluate initialization on <span className='font-semibold'>EuRoC</span> and{' '}
-            <span className='font-semibold'>VBR</span>, splitting every sequence into 2.5-second segments and
-            initializing each one from 10 keyframes. A segment counts as a success when the gravity direction error
-            stays below 2&deg; and the velocity RMSE below 0.1&nbsp;m/s (0.3&nbsp;m/s on VBR).
-          </p>
-
-          <h3 className='pt-8 pb-3'>EuRoC Initialization</h3>
-          <p className='pb-4 text-lg'>
-            {MACI2} averages a <span className={hlTextColor}>0.418&deg;</span> gravity error and{' '}
-            <span className={hlTextColor}>0.018&nbsp;m/s</span> velocity RMSE — about 60% and 42% below the strongest
-            baseline on each metric (DRT-t and VINS-Fusion) — while solving{' '}
-            <span className={hlTextColor}>99.9%</span> of all segments. Even without the learned IMU model, the
-            metrics-aware visual covariance alone already outperforms every baseline.
-          </p>
-          <div className='overflow-x-auto'>
-            <table className='w-full text-left text-sm lg:text-base border-collapse'>
-              <thead>
-                <tr className={clsx(secondaryBgColor, 'font-semibold')}>
-                  <th className='py-2 px-3 rounded-l-lg'>Method</th>
-                  <th className='py-2 px-3'>Input</th>
-                  <th className='py-2 px-3 text-right'>Vel. RMSE (m/s) ↓</th>
-                  <th className='py-2 px-3 text-right'>G.Dir (&deg;) ↓</th>
-                  <th className='py-2 px-3 text-right rounded-r-lg'>Success Rate ↑</th>
-                </tr>
-              </thead>
-              <tbody>
-                {eurocRows.map(({ method, stereo, vel, gdir, sr, ours }) => (
-                  <tr
-                    key={method}
-                    className={clsx(
-                      'border-b',
-                      mode === 'dark' ? 'border-neutral-700' : 'border-gray-200',
-                      ours && clsx(hlTextColor, 'font-semibold')
-                    )}
-                  >
-                    <td className='py-2 px-3'>
-                      {ours ? (
-                        <>
-                          {MACI2} {method.replace('MAC-I2 ', '')}
-                        </>
-                      ) : (
-                        method
-                      )}
-                    </td>
-                    <td className='py-2 px-3 font-light'>{stereo ? 'Stereo' : 'Mono'}</td>
-                    <td className='py-2 px-3 text-right tabular-nums'>{vel}</td>
-                    <td className='py-2 px-3 text-right tabular-nums'>{gdir}</td>
-                    <td className='py-2 px-3 text-right tabular-nums'>{sr}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className='pt-3 text-sm font-light'>
-            Table 1. Initialization errors and success rate on EuRoC (10-keyframe setting), averaged over the evaluation
-            sequences. <span className='align-super text-xs'>*</span> Initialized with ground-truth IMU biases;
-            performance degrades without them, so these rows are excluded from the ranking.
-          </p>
-
-          <h3 className='pt-10 pb-3'>Robustness and Bias Estimation</h3>
-          <p className='pb-4 text-lg'>
-            On the large-scale, dynamic <span className='font-semibold'>VBR</span> sequences the gap widens: VINS-Mono
-            and both sqrt-VINS variants fall below a 0.10 success rate and the best baseline, ORB-SLAM3, reaches only
-            0.561, whereas {MACI2} solves <span className={hlTextColor}>80%</span> of the segments with the lowest
-            average errors (1.136&deg; and 0.191&nbsp;m/s).
-          </p>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 items-start [&_img]:h-[420px] [&_img]:w-auto [&_img]:object-contain [&_img]:mx-auto'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 items-start [&_img]:h-[340px] [&_img]:w-auto [&_img]:object-contain [&_img]:mx-auto'>
             <Figure
               img_src={asset('/images/euroc_gerr_vs_sr.png')}
               caption={
                 <>
-                  Gravity error vs. initialization success rate on EuRoC — {MACI2} sits alone in the bottom-right
-                  corner, pairing a 99.9% success rate with the lowest gravity error.
+                  Gravity error vs. initialization success rate on EuRoC — {MACI2} reaches a 99.9% success rate with
+                  the lowest gravity error.
                 </>
               }
               isDark={mode === 'dark'}
               idx={4}
             />
             <Figure
-              img_src={asset('/images/gyro_bias_estimate.png')}
-              caption='Gyroscope bias magnitude error across all EuRoC sequences. Our estimate stays accurate on every sequence, including the ones where the baselines break down.'
+              img_src={asset('/images/calib_results.png')}
+              caption='Calibration accuracy across sequences compared with existing methods.'
               isDark={mode === 'dark'}
               idx={5}
             />
           </div>
-
-          <h3 className='pt-10 pb-3'>Camera–IMU Calibration</h3>
-          <p className='pb-4 text-lg'>
-            We repeat the calibration 10 times on each of the four TUM-VI <em>calib-imu</em> sequences, whose aggressive
-            six-DoF motions were designed for checkerboard calibration rather than feature tracking. {MACI2} recovers
-            consistent extrinsics across every trial, while VINS-Mono loses tracking in most of them and drifts far from
-            the Kalibr reference.
-          </p>
-          <Figure
-            img_src={asset('/images/calib_results.png')}
-            caption='Camera–IMU extrinsic calibration on the TUM-VI calib-imu sequences, 10 trials each, compared against the Kalibr ground truth.'
-            isDark={mode === 'dark'}
-            idx={6}
-          />
         </div>
       </section>
 
