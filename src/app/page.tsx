@@ -14,11 +14,9 @@ import UnderlineLink from '@/components/links/UnderlineLink';
 import ExternalSwitch from '@/components/Switch';
 
 
-// !TODO: fill in the public links once they are available.
+// !TODO: add the GitHub repo and video links once they are available.
 const links = {
-  github: '#',
-  arxiv: '#',
-  video: '#',
+  arxiv: 'https://arxiv.org/abs/2609.07116',
 };
 
 // Method name, typeset with a real superscript so it matches the paper's MAC-I$^2$.
@@ -130,14 +128,8 @@ export default function HomePage() {
             </span>
           </div>
           <div className='container flex flex-row flex-wrap items-center gap-x-8 justify-center text-lg'>
-            <ArrowLink className='mt-6' href={links.github} variant={mode} size='large'>
-              GitHub Repo
-            </ArrowLink>
             <ArrowLink className='mt-6' href={links.arxiv} variant={mode} size='large'>
               arXiv Page
-            </ArrowLink>
-            <ArrowLink className='mt-6' href={links.video} variant={mode} size='large'>
-              Video
             </ArrowLink>
           </div>
         </div>
