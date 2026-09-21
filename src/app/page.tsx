@@ -347,6 +347,7 @@ export default function HomePage() {
             idx={2}
           />
 
+          {/* Showcase subsection hidden for now; uncomment to restore.
           <h3 className='pt-12'>Showcase: VI Initialization &amp; Calibration</h3>
           <p className='py-2 text-lg'>
             As a showcase application, we build a VI initialization and calibration system upon {MACI2}, since accurate
@@ -375,6 +376,7 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+          */}
         </div>
       </section>
 
@@ -392,13 +394,13 @@ export default function HomePage() {
                 </>
               }
               isDark={mode === 'dark'}
-              idx={4}
+              idx={3}
             />
             <Figure
               img_src={asset('/images/calib_results.png')}
               caption='Calibration accuracy across sequences compared with existing methods.'
               isDark={mode === 'dark'}
-              idx={5}
+              idx={4}
             />
           </div>
         </div>
