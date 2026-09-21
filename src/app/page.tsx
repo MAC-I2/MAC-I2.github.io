@@ -35,10 +35,15 @@ export default function HomePage() {
   const hlTextColor = mode === 'dark' ? 'text-primary-500' : 'text-primary-600';
   const hlBgColor = mode === 'dark' ? 'bg-primary-500' : 'bg-primary-600';
 
-  const citation_bibtex = `@article{fei2026maci2,
+  // BibTeX exported from https://arxiv.org/bibtex/2609.07116.
+  const citation_bibtex = `@misc{fei2026maci2learnedmetricsawarecovariance,
     title={MAC-I$^2$: Learned Metrics-Aware Covariance for Robust Visual-Inertial Fusion in Initialization and Calibration},
-    author={Fei, Xiang and Qiu, Yuheng and Xu, Can and Chen, Yutian and Li, Ruogu and Zuo, Xingxing and Wang, Wenshan and Scherer, Sebastian},
-    year={2026}
+    author={Xiang Fei and Yuheng Qiu and Can Xu and Yutian Chen and Ruogu Li and Xingxing Zuo and Wenshan Wang and Sebastian Scherer},
+    year={2026},
+    eprint={2609.07116},
+    archivePrefix={arXiv},
+    primaryClass={cs.RO},
+    url={https://arxiv.org/abs/2609.07116},
   }`;
 
   // Key quantitative highlights (from the paper abstract / experiments).
